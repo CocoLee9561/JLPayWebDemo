@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JLPayWebApp", "JLPayWebApp\JLPayWebApp.csproj", "{B8ACBBE9-2257-48C2-A66E-7E8959B80545}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8ACBBE9-2257-48C2-A66E-7E8959B80545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8ACBBE9-2257-48C2-A66E-7E8959B80545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8ACBBE9-2257-48C2-A66E-7E8959B80545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8ACBBE9-2257-48C2-A66E-7E8959B80545}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8AC382A-165A-4734-A028-B348EE678C54}
+	EndGlobalSection
+EndGlobal

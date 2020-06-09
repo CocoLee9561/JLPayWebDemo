@@ -1,0 +1,47 @@
+﻿@page
+@model JLPayWebApp.Pages.QrcodePayModel
+@{
+    ViewData["Title"] = "扫码支付接口";
+    
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<form class="navbar navbar-default" style="align-items: flex-start">
+    <div>
+        <p>必传参数：</p>
+        @foreach (var item in ViewData["mustSendParamsKeys"])
+        {
+            <div class="form-group">
+                <label class="form-label">机构号(org_code)@item</label>
+                <input type="text">
+            </div>
+        }
+        <div class="form-group">
+            <label class="form-label">机构号(org_code)</label>
+            <input type="text">
+        </div>
+        <div class="form-group">
+            <label class="form-label">机构号(org_code)</label>
+            <input type="text">
+        </div>
+    </div>
+    <div>
+        <p>非必传参数：</p>
+        <div class="form-group">
+            <label class="form-label">机构号(org_code)</label>
+            <input>
+        </div>
+    </div>
+    <input type="button" onclick="" />提交请求
+</form>
+<div>
+    提交结果：
+    <p>签名原串：</p>
+    <p>请求参数：</p>
+    <p>响应参数串：</p>
+    <p>响应参数验签结果：</p>
+    <p>异步通知: </p>
+    <p>异步通知验签结果: </p>
+</div>
+
