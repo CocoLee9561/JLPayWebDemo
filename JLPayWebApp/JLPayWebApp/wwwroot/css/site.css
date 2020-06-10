@@ -73,3 +73,23 @@ body {
 .form-label{
     margin-right: 10px;
 }
+.form-group-flex {
+    display: flex;
+    justify-content: space-between;
+}
+.navbar-flex-start {
+    align-items: flex-start;
+    padding-bottom: 30px;
+    margin: 10px 0 30px 0;
+}
+.btn-submit {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+}
+.result-show-group {
+    margin-top: 25px;
+}
+.result-show-textarea{
+    width: 100%;
+}

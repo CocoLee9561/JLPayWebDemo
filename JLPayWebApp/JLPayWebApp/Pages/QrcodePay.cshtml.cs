@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JLPayWebApp.Models;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace JLPayWebApp.Pages
@@ -13,77 +16,45 @@ namespace JLPayWebApp.Pages
         
         public void OnGet()
         {
-            Dictionary<string, string> mustSendParamsText = new Dictionary<string, string> {
-                { "org_code", "机构号" },
-                { "mch_id", "商户号" },
-                { "nonce_str", "随机字符串" },
-                { "sign", "签名" },
-                { "out_trade_no", "外部订单号" },
-                { "body", "商品标题" },
-                { "attach", "商品描述" },
-                { "total_fee", "交易金额" },
-                { "pay_type", "交易类型" },
-                { "mch_create_ip", "终端IP" },
-                { "notify_url", "回调地址" }
-            };
-            Dictionary<string, string> mustSendParamsValue = new Dictionary<string, string> {
-                { "org_code", "" },
-                { "mch_id", "" },
-                { "nonce_str", "" },
-                { "sign", "" },
-                { "out_trade_no", "" },
-                { "body", "" },
-                { "attach", "" },
-                { "total_fee", "" },
-                { "pay_type", "" },
-                { "mch_create_ip", "" },
-                { "notify_url", "" }
-            };
-            Dictionary<string, string> optionalSendParamsText = new Dictionary<string, string> {
-                { "term_no", "终端号" },
-                { "sign_type", "签名方式" },
-                { "payment_valid_time", "订单有效期" },
-                { "limit_pay", "指定支付方式" },
-                { "profit_sharing", "是否分账" },
-                { "is_hire_purchase", "分期标识" },
-                { "hire_purchase_num", "分期数" },
-                { "hire_purchase_seller_percent", "卖家承担的手续费比例" },
-                { "remark", "备注" },
-                { "op_user_id", "操作员" },
-                { "op_shop_id", "门店号" },
-                { "device_info", "终端设备号" },
-                { "longitude", "经度" },
-                { "latitude", "纬度" },
-                { "sub_appid", "公众账号ID" }
-            };
-            Dictionary<string, string> optionalSendParamsValue = new Dictionary<string, string> {
-                { "term_no", "" },
-                { "sign_type", "" },
-                { "payment_valid_time", "" },
-                { "limit_pay", "" },
-                { "profit_sharing", "" },
-                { "is_hire_purchase", "" },
-                { "hire_purchase_num", "" },
-                { "hire_purchase_seller_percent", "" },
-                { "remark", "" },
-                { "op_user_id", "" },
-                { "op_shop_id", "" },
-                { "device_info", "" },
-                { "longitude", "" },
-                { "latitude", "" },
-                { "sub_appid", "" }
-            };
-            ViewData["mustSendParamsKeys"] = mustSendParamsText.Keys;
-            ViewData["mustSendParamsText"] = mustSendParamsText;
-            ViewData["mustSendParamsValue"] = mustSendParamsValue;
-            ViewData["optionalSendParamsText"] = optionalSendParamsText;
-            ViewData["optionalSendParamsValue"] = optionalSendParamsValue;
+            //QrcodePayRequest reqParams = new QrcodePayRequest();
+            //JArray r = JsonConvert.DeserializeObject<JArray>(JsonConvert.SerializeObject(reqParams));
+            //foreach(var item in r) { }
+        }
+
+        public void OnPost(QrcodePayRequest request)
+        {
+            var req = HttpContext.Request.Form;
+            request.sign = "";
+            var requestDic = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(request));
+            
+            // 排序: 除sign字段以外,所有字段名按ASCII码从小到大排序为JSON格式待签名串
+            SortedDictionary<string, object> requestInfo = new SortedDictionary<string, object>(requestDic);
+
+            // 生成签名：用SHA256WithRSA算法私钥签名，得到sign值
+
+
+            // http请求接口并得到返回结果
+
+            // 解析返回结果，得到sign
+
+            // 排序: 除sign字段以外,所有返回字段名按ASCII码从小到大排序为JSON格式待签名串
+
+            // 生成签名：用SHA256WithRSA算法私钥签名，得到新的sign值
+
+            // 验证签名：对比新的sign值和返回的sign是否相同
+
+        }
+
+        public string createSign()
+        {
+            return "";
         }
 
 
-        public void handleClick()
+        public void handleSubmit(QrcodePayRequest request)
         {
             // 处理表单请求
+            Console.WriteLine("");
         }
     }
 }
