@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JLPayWebApp.Attris;
 using JLPayWebApp.Models;
+using JLPayWebApp.Utils;
 using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,48 +15,115 @@ namespace JLPayWebApp.Pages
 {
     public class QrcodePayModel : PageModel
     {
-        
+        public static List<ParamInfoAttribute> paraRequiredList = new List<ParamInfoAttribute>();
+        public static List<ParamInfoAttribute> paraNotRequiredList = new List<ParamInfoAttribute>();
+        public static string url = JlpayConfig.serverUrl + "qrcodepay";
+        public static string imgFilePath = JlpayConfig.baseUrl + Guid.NewGuid().ToString().Replace("-", "") + ".png";
+        public static bool isSignResValid = false;
         public void OnGet()
         {
-            //QrcodePayRequest reqParams = new QrcodePayRequest();
-            //JArray r = JsonConvert.DeserializeObject<JArray>(JsonConvert.SerializeObject(reqParams));
-            //foreach(var item in r) { }
+            paraRequiredList = new List<ParamInfoAttribute>();
+            paraNotRequiredList = new List<ParamInfoAttribute>();
+            QrcodePayRequest reqParams = new QrcodePayRequest();
+            Type type = reqParams.GetType();// 等价于 typeof(QrcodePayRequest);
+            var props = type.GetProperties();
+
+            foreach(var prop in props)
+            {
+                foreach (object attribute in prop.GetCustomAttributes(true))
+                {
+                    ParamInfoAttribute pri = (ParamInfoAttribute)attribute;
+                    if (pri != null && pri.Required)
+                    {
+                        paraRequiredList.Add(pri);
+                    }
+                    if (pri != null && !pri.Required)
+                    {
+                        paraNotRequiredList.Add(pri);
+                    }
+                }
+            }
+
         }
 
         public void OnPost(QrcodePayRequest request)
         {
-            var req = HttpContext.Request.Form;
-            request.sign = "";
-            var requestDic = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(request));
-            
-            // 排序: 除sign字段以外,所有字段名按ASCII码从小到大排序为JSON格式待签名串
-            SortedDictionary<string, object> requestInfo = new SortedDictionary<string, object>(requestDic);
+            request = getRequestTestData();
+            var requestData = JsonConvert.SerializeObject(request);
+            string requestParamStr = buildRequestParams(requestData);
 
-            // 生成签名：用SHA256WithRSA算法私钥签名，得到sign值
+            // http请求
+            string responseData = HttpHelper.SendWebRequest(requestParamStr, url);
+            ViewData["responseParams"] = responseData;
 
-
-            // http请求接口并得到返回结果
-
-            // 解析返回结果，得到sign
-
-            // 排序: 除sign字段以外,所有返回字段名按ASCII码从小到大排序为JSON格式待签名串
-
-            // 生成签名：用SHA256WithRSA算法私钥签名，得到新的sign值
-
-            // 验证签名：对比新的sign值和返回的sign是否相同
+            // 解析返回结果
+            QrcodePayResponse qrcodePayResponse = JsonConvert.DeserializeObject<QrcodePayResponse>(responseData);
+            if (string.IsNullOrEmpty(qrcodePayResponse.ret_code) || qrcodePayResponse.ret_code != "00" || string.IsNullOrEmpty(qrcodePayResponse.sign))
+            {
+                Console.WriteLine("交易失败");
+                return;
+            }
+            // 验证签名
+            isSignResValid = HttpHelper.VerifySignature(responseData);
+            // 生成二维码
+            if (isSignResValid && !string.IsNullOrEmpty(qrcodePayResponse.code_url)) createQrcode(qrcodePayResponse.code_url);
+            ViewData["checkRspSign"] = isSignResValid ? "返回结果验证成功" : "返回结果验证失败";
 
         }
 
-        public string createSign()
+        public QrcodePayRequest getRequestTestData()
         {
-            return "";
+            return new QrcodePayRequest()
+            {
+                attach = "主扫商品描述",
+                body = "主扫测试",
+                device_info = "80005611",
+                latitude = "22.144889",
+                longitude = "113.571558",
+                mch_create_ip = "172.20.6.21",
+                mch_id = "84944035812A01P",
+                nonce_str = "123456789abcdefg",
+                notify_url = "http://127.0.0.1/qrcode/notify/",
+                op_shop_id = "100001",
+                op_user_id = "1001",
+                org_code = "50265462",
+                out_trade_no = CommonHelper.GetTimeStampTen(),
+                pay_type = "alipay",
+                payment_valid_time = "20",
+                remark = "主扫备注",
+                term_no = "12345678",
+                total_fee = "1",
+                sign_type = "RSA256"
+            };
         }
 
-
-        public void handleSubmit(QrcodePayRequest request)
+        public string buildRequestParams(string requestData)
         {
-            // 处理表单请求
-            Console.WriteLine("");
+            // 排序
+            Dictionary<string, string> paramForSignDic = HttpHelper.sortRequestParams(requestData);
+            string paramForSignJson = JsonConvert.SerializeObject(paramForSignDic);
+
+            // 生成签名
+            var requestSign = RSATool.Sign(paramForSignJson, JlpayConfig.merchant_private_key, "UTF-8");
+            // 参数中增加sign
+            paramForSignDic.Add("sign", requestSign);
+            // 生成入参
+            string requestParamStr = JsonConvert.SerializeObject(paramForSignDic);
+
+            ViewData["originSignStr"] = requestSign;
+            ViewData["requestParams"] = requestParamStr;
+
+            return requestParamStr;
         }
+
+        public static void createQrcode(string content)
+        {
+            CommonHelper.CreateQrcodeImage(content, imgFilePath);
+        }
+
+
+
+
+
     }
 }

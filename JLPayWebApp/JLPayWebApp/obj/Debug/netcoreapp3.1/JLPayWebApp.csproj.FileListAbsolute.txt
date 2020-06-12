@@ -13,8 +13,6 @@ D:\C#\JLPayWebApp\JLPayWebApp\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\JLPayWebApp.csprojAssemblyReference.cache
 D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\JLPayWebApp.AssemblyInfoInputs.cache
 D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\JLPayWebApp.AssemblyInfo.cs
-D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\JLPayWebApp.csproj.CoreCompileInputs.cache
-D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\JLPayWebApp.MvcApplicationPartsAssemblyInfo.cache
 D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\JLPayWebApp.RazorAssemblyInfo.cache
 D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\JLPayWebApp.RazorAssemblyInfo.cs
 D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\JLPayWebApp.TagHelpers.input.cache
@@ -37,3 +35,12 @@ D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\JLPayWebApp.dll
 D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\JLPayWebApp.pdb
 D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\JLPayWebApp.genruntimeconfig.cache
 D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\Razor\Pages\QrcodePay.cshtml.g.cs
+D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\Razor\Pages\NotifyPage.cshtml.g.cs
+D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\Razor\Pages\MicroPay.cshtml.g.cs
+D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\Razor\Pages\OfficialPay.cshtml.g.cs
+D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\Razor\Pages\OrderCancel.cshtml.g.cs
+D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\Razor\Pages\OrderRefund.cshtml.g.cs
+D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\Razor\Pages\OrderStatusQuery.cshtml.g.cs
+D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\Razor\Pages\UnionPay.cshtml.g.cs
+D:\C#\JLPayWebApp\JLPayWebApp\obj\Debug\netcoreapp3.1\Razor\Pages\WapH5Pay.cshtml.g.cs
+D:\C#\JLPayWebApp\JLPayWebApp\bin\Debug\netcoreapp3.1\ThoughtWorks.QRCode.dll

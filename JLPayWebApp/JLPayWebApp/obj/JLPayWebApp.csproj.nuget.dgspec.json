@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\C#\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj": {}
+    "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj": {}
   },
   "projects": {
-    "D:\\C#\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj": {
+    "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C#\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
+        "projectUniqueName": "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
         "projectName": "JLPayWebApp",
-        "projectPath": "D:\\C#\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
+        "projectPath": "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
         "packagesPath": "C:\\Users\\lijing01\\.nuget\\packages\\",
-        "outputPath": "D:\\C#\\JLPayWebApp\\JLPayWebApp\\obj\\",
+        "outputPath": "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lijing01\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -42,6 +42,18 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[12.0.3, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.Runtime.Handles": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "ThoughtWorks.QRCode.Core": {
+              "target": "Package",
+              "version": "[1.0.1.2, )"
             }
           },
           "imports": [

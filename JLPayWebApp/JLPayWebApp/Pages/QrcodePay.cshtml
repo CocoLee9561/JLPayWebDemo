@@ -1,92 +1,29 @@
 ﻿@page
 @model JLPayWebApp.Pages.QrcodePayModel
+@using JLPayWebApp.Attris;
 @{
     ViewData["Title"] = "扫码支付接口";
-
 }
 
 <h1>扫码支付接口</h1>
 <form class="navbar navbar-default navbar-flex-start" method="post">
     <div>
         <p>必传参数：</p>
-        <div class="form-group form-group-flex">
-            机构号(org_code)：<input type="text" name="org_code" required>
-        </div>
-        <div class="form-group form-group-flex">
-            商户号(mch_id)：<input type="text" name="mch_id" required>
-        </div>
-        <div class="form-group form-group-flex">
-            随机字符串(nonce_str)：<input type="text" name="nonce_str" required>
-        </div>
-        <div class="form-group form-group-flex">
-            外部订单号(out_trade_no)：<input type="text" name="out_trade_no" required>
-        </div>
-        <div class="form-group form-group-flex">
-            商品标题(body)：<input type="text" name="body" required>
-        </div>
-        <div class="form-group form-group-flex">
-            商品描述(attach)：<input type="text" name="attach" required>
-        </div>
-        <div class="form-group form-group-flex">
-            交易金额(total_fee)：<input type="text" name="total_fee" required>
-        </div>
-        <div class="form-group form-group-flex">
-            交易类型(pay_type)：<input type="text" name="pay_type" required>
-        </div>
-        <div class="form-group form-group-flex">
-            终端IP(mch_create_ip)：<input type="text" name="mch_create_ip" required>
-        </div>
-        <div class="form-group form-group-flex">
-            回调地址(notify_url)：<input type="text" name="notify_url" required>
-        </div>
+        @foreach (ParamInfoAttribute item in QrcodePayModel.paraRequiredList)
+        {
+            <div class="form-group form-group-flex">
+                @item.Description (@item.Name)：<input type="text" name="@item.Name">
+            </div>
+        }
     </div>
     <div>
         <p>非必传参数：</p>
-        <div class="form-group form-group-flex">
-            终端号(term_no)：<input type="text" name="term_no">
-        </div>
-        <div class="form-group form-group-flex">
-            签名方式(sign_type)：<input type="text" name="sign_type">
-        </div>
-        <div class="form-group form-group-flex">
-            订单有效期(payment_valid_time)：<input type="text" name="payment_valid_time">
-        </div>
-        <div class="form-group form-group-flex">
-            指定支付方式(limit_pay)：<input type="text" name="limit_pay">
-        </div>
-        <div class="form-group form-group-flex">
-            是否分账(profit_sharing)：<input type="text" name="profit_sharing">
-        </div>
-        <div class="form-group form-group-flex">
-            分期标识(is_hire_purchase)：<input type="text" name="is_hire_purchase">
-        </div>
-        <div class="form-group form-group-flex">
-            分期数(hire_purchase_num)：<input type="text" name="hire_purchase_num">
-        </div>
-        <div class="form-group form-group-flex">
-            卖家承担的手续费比例(hire_purchase_seller_percent)：<input type="text" name="hire_purchase_seller_percent">
-        </div>
-        <div class="form-group form-group-flex">
-            备注(remark)：<input type="text" name="remark">
-        </div>
-        <div class="form-group form-group-flex">
-            操作员(op_user_id)：<input type="text" name="op_user_id">
-        </div>
-        <div class="form-group form-group-flex">
-            门店号(op_shop_id)：<input type="text" name="op_shop_id">
-        </div>
-        <div class="form-group form-group-flex">
-            终端设备号(device_info)：<input type="text" name="device_info">
-        </div>
-        <div class="form-group form-group-flex">
-            经度(longitude)：<input type="text" name="longitude">
-        </div>
-        <div class="form-group form-group-flex">
-            纬度(latitude)：<input type="text" name="latitude">
-        </div>
-        <div class="form-group form-group-flex">
-            公众账号ID(sub_appid)：<input type="text" name="sub_appid">
-        </div>
+        @foreach (ParamInfoAttribute item in QrcodePayModel.paraNotRequiredList)
+        {
+            <div class="form-group form-group-flex">
+                @item.Description (@item.Name)：<input type="text" name="@item.Name">
+            </div>
+        }
     </div>
     <input type="submit" class="btn-submit" />
 </form>
@@ -107,7 +44,9 @@
     <div class="result-show-group">
         <p>响应参数验签结果：</p>
         <textarea class="result-show-textarea" readonly>@ViewData["checkRspSign"]</textarea>
+        <img src="@QrcodePayModel.imgFilePath" />
     </div>
+   
     <div class="result-show-group">
         <p>异步通知：</p>
         <textarea class="result-show-textarea" readonly>@ViewData["notifyContent"]</textarea>

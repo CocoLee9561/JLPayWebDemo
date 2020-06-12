@@ -25,7 +25,6 @@ namespace JLPayWebApp.Utils
             SHA256 sh = new SHA256CryptoServiceProvider();
             byte[] signData = rsa.SignData(Data, sh);
             return Convert.ToBase64String(signData);
-
         }
         /// <summary>  
         /// 验签  

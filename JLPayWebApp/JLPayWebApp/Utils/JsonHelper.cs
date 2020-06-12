@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +23,21 @@ namespace JLPayWebApp.Utils
             string jsonStr = JsonConvert.SerializeObject(dict);
             return jsonStr;
         }
+        /// <summary>
+        /// 将已排序字典类型序列化为json字符串
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="dict"></param>
+        /// <returns></returns>
+        public static string SerializeSortedDictionaryToJsonString<TKey, TValue>(SortedDictionary<TKey, TValue> dict)
+        {
+            if (dict.Count == 0)
+                return "";
 
+            string jsonStr = JsonConvert.SerializeObject(dict);
+            return jsonStr;
+        }
         /// <summary>
         /// 将json字符串反序列化为字典类型
         /// </summary>
