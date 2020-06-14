@@ -15,7 +15,7 @@ namespace JLPayWebApp.Models
         /// <summary>
         /// 机构号
         /// </summary>
-        [ParamInfo("org_code", "text", "机构号", Required = true)]
+        [ParamInfo("org_code", "text", "机构号", Required = true, stringLength =10)]
         public string org_code { get; set; }
 
         /// <summary>

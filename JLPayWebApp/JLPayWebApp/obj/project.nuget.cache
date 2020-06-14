@@ -1,18 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "59Hc6UiKJFjGvhD+r/eP5GOoZOsS9kYba/Kmoa087BBvOR9ZuV7AM+dX7EwOOwPuWEvvG8+z7dXUHdc62/bw0A==",
+  "dgSpecHash": "gaEFQAUO2el3M/ZIrrYf49jiVGz7wgdhSts70/u3pe+ZjgStYgP6YwhWNoyow1RynaLntW7FZPfad9RiMd7EuA==",
   "success": true,
-  "projectFilePath": "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
+  "projectFilePath": "C:\\Project\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\lijing01\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
-    "C:\\Users\\lijing01\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
-    "C:\\Users\\lijing01\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
-    "C:\\Users\\lijing01\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
-    "C:\\Users\\lijing01\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
-    "C:\\Users\\lijing01\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
-    "C:\\Users\\lijing01\\.nuget\\packages\\system.runtime.handles\\4.3.0\\system.runtime.handles.4.3.0.nupkg.sha512",
-    "C:\\Users\\lijing01\\.nuget\\packages\\thoughtworks.qrcode.core\\1.0.1.2\\thoughtworks.qrcode.core.1.0.1.2.nupkg.sha512",
-    "C:\\Users\\lijing01\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Users\\shiningrush\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\shiningrush\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\shiningrush\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\shiningrush\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime.handles\\4.3.0\\system.runtime.handles.4.3.0.nupkg.sha512",
+    "C:\\Users\\shiningrush\\.nuget\\packages\\thoughtworks.qrcode.core\\1.0.1.2\\thoughtworks.qrcode.core.1.0.1.2.nupkg.sha512"
   ],
   "logs": []
 }

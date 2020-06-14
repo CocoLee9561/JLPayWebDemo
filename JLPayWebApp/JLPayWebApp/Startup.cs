@@ -24,8 +24,9 @@ namespace JLPayWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddApplicationInsightsTelemetry();
-            services.AddApplicationInsightsTelemetry();
+            services.AddControllers();
+            //services.AddApplicationInsightsTelemetry();
+            //services.AddApplicationInsightsTelemetry();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +53,7 @@ namespace JLPayWebApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

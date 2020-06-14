@@ -15,10 +15,12 @@ namespace JLPayWebApp.Pages
 {
     public class QrcodePayModel : PageModel
     {
+        public static string TestModel;
+
         public static List<ParamInfoAttribute> paraRequiredList = new List<ParamInfoAttribute>();
         public static List<ParamInfoAttribute> paraNotRequiredList = new List<ParamInfoAttribute>();
         public static string url = JlpayConfig.serverUrl + "qrcodepay";
-        public static string imgFilePath = JlpayConfig.baseUrl + Guid.NewGuid().ToString().Replace("-", "") + ".png";
+        public static string imgBase64 = "";
         public static bool isSignResValid = false;
         public void OnGet()
         {
@@ -118,12 +120,9 @@ namespace JLPayWebApp.Pages
 
         public static void createQrcode(string content)
         {
-            CommonHelper.CreateQrcodeImage(content, imgFilePath);
+            string imgurl = JlpayConfig.baseUrl + Guid.NewGuid().ToString().Replace("-", "") + ".png";
+            imgBase64 = CommonHelper.CreateQrcodeImage(content, imgurl);
         }
-
-
-
-
 
     }
 }

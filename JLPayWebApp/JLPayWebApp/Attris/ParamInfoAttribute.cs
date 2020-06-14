@@ -69,5 +69,14 @@ namespace JLPayWebApp.Attris
                 isRequired = value;
             }
         }
+
+        /// <summary>
+        /// 字符串长度
+        /// </summary>
+        public int stringLength
+        {
+            get;
+            set;
+        }
     }
 }

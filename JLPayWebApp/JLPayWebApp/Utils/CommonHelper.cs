@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -66,13 +67,14 @@ namespace JLPayWebApp.Utils
         /// </summary>
         /// <param name="content">二维码内容</param>
         /// <param name="filePath">图片保存地址，需要绝对路径</param>
-        public static void CreateQrcodeImage(string content, string filePath)
+        public static string CreateQrcodeImage(string content, string filePath)
         {
             int size = 10;  //二维码中每个小点的大小
             Bitmap image = CreateImgCode(content, size); //生成二维码图片
 
             //保存图片，需要图片的绝对地址，这是web项目
-            image.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
+            //image.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
+            return ImgToBase64String(image);
         }
 
 
@@ -82,7 +84,7 @@ namespace JLPayWebApp.Utils
         /// &lt;param name="codeNumber">要生成二维码的字符串&lt;/param>       
         /// &lt;param name="size">二维码每个颗粒大小尺寸&lt;/param>  
         /// &lt;returns>二维码图片&lt;/returns>  
-        private static Bitmap CreateImgCode(string codeNumber, int size)
+        public static Bitmap CreateImgCode(string codeNumber, int size)
         {
             //创建二维码生成类  
             QRCodeEncoder qrCodeEncoder = new QRCodeEncoder();
@@ -98,6 +100,42 @@ namespace JLPayWebApp.Utils
             Bitmap image = qrCodeEncoder.Encode(codeNumber);
 
             return image;
+        }
+
+
+        //图片转为base64编码的字符串
+        public static string ImgToBase64String(Bitmap bmp)
+        {
+            try
+            {
+                MemoryStream ms = new MemoryStream();
+                bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                byte[] arr = new byte[ms.Length];
+                ms.Position = 0;
+                ms.Read(arr, 0, (int)ms.Length);
+                ms.Close();
+                return Convert.ToBase64String(arr);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        //threeebase64编码的字符串转为图片
+        public static Bitmap Base64StringToImage(string strbase64)
+        {
+            try
+            {
+                byte[] arr = Convert.FromBase64String(strbase64);
+                MemoryStream ms = new MemoryStream(arr);
+                Bitmap bmp = new Bitmap(ms);
+                ms.Close();
+                return bmp;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }
