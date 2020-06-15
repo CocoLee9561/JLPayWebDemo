@@ -1,4 +1,48 @@
 ﻿@page
 @model JLPayWebApp.Pages.OrderStatusQueryModel
-@{
-}
+
+@using JLPayWebApp.Attris;
+
+<h1>订单查询接口</h1>
+
+<form class="navbar navbar-default navbar-flex-start" method="post">
+    <div>
+        <p>必传参数：</p>
+        @foreach (ParamInfoAttribute item in OrderStatusQueryModel.paraRequiredList)
+        {
+            <div class="form-group form-group-flex">
+                @item.Description (@item.Name)：<input type="text" name="@item.Name">
+            </div>
+        }
+    </div>
+    <div>
+        <p>非必传参数：</p>
+        @foreach (ParamInfoAttribute item in OrderStatusQueryModel.paraNotRequiredList)
+        {
+            <div class="form-group form-group-flex">
+                @item.Description (@item.Name)：<input type="text" name="@item.Name">
+            </div>
+        }
+    </div>
+    <input type="submit" class="btn-submit" />
+</form>
+<div>
+    <h1>提交结果：</h1>
+    <div class="result-show-group">
+        <p>签名原串：</p>
+        <textarea class="result-show-textarea" readonly>@ViewData["originSignStr"]</textarea>
+    </div>
+    <div class="result-show-group">
+        <p>请求参数：</p>
+        <textarea class="result-show-textarea" readonly>@ViewData["requestParams"]</textarea>
+    </div>
+    <div class="result-show-group">
+        <p>响应参数串：</p>
+        <textarea class="result-show-textarea" readonly>@ViewData["responseParams"]</textarea>
+    </div>
+    <div class="result-show-group">
+        <p>响应参数验签结果：</p>
+        <textarea class="result-show-textarea" readonly>@ViewData["checkRspSign"]</textarea>
+    </div>
+
+</div>

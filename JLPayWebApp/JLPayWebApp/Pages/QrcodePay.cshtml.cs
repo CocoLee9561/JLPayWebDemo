@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Timers;
 using JLPayWebApp.Attris;
 using JLPayWebApp.Models;
 using JLPayWebApp.Utils;
@@ -15,19 +16,21 @@ namespace JLPayWebApp.Pages
 {
     public class QrcodePayModel : PageModel
     {
-        public static string TestModel;
-
-        public static List<ParamInfoAttribute> paraRequiredList = new List<ParamInfoAttribute>();
-        public static List<ParamInfoAttribute> paraNotRequiredList = new List<ParamInfoAttribute>();
+        public static string notifyContent;
+        public static string checkNotifySign;
+        public List<ParamInfoAttribute> paraRequiredList = new List<ParamInfoAttribute>();
+        public List<ParamInfoAttribute> paraNotRequiredList = new List<ParamInfoAttribute>();
         public static string url = JlpayConfig.serverUrl + "qrcodepay";
-        public static string imgBase64 = "";
+        public string imgBase64 = "";
         public static bool isSignResValid = false;
+
+        Timer timer = null;
         public void OnGet()
         {
             paraRequiredList = new List<ParamInfoAttribute>();
             paraNotRequiredList = new List<ParamInfoAttribute>();
             QrcodePayRequest reqParams = new QrcodePayRequest();
-            Type type = reqParams.GetType();// 等价于 typeof(QrcodePayRequest);
+            Type type = reqParams.GetType();
             var props = type.GetProperties();
 
             foreach(var prop in props)
@@ -46,6 +49,11 @@ namespace JLPayWebApp.Pages
                 }
             }
 
+            //timer = new Timer();
+            //timer.Enabled = true;
+            //timer.Interval = 1000; //执行间隔时间,单位为毫秒 
+            //timer.Start();
+            //timer.Elapsed += new System.Timers.ElapsedEventHandler(checkNotify);
         }
 
         public void OnPost(QrcodePayRequest request)
@@ -67,6 +75,9 @@ namespace JLPayWebApp.Pages
             }
             // 验证签名
             isSignResValid = HttpHelper.VerifySignature(responseData);
+            if(isSignResValid) {
+                OrderHelper.transactionId = qrcodePayResponse.transaction_id;
+            }
             // 生成二维码
             if (isSignResValid && !string.IsNullOrEmpty(qrcodePayResponse.code_url)) createQrcode(qrcodePayResponse.code_url);
             ViewData["checkRspSign"] = isSignResValid ? "返回结果验证成功" : "返回结果验证失败";
@@ -82,20 +93,20 @@ namespace JLPayWebApp.Pages
                 device_info = "80005611",
                 latitude = "22.144889",
                 longitude = "113.571558",
-                mch_create_ip = "172.20.6.21",
+                mch_create_ip = OrderHelper.localIpAddress,
                 mch_id = "84944035812A01P",
                 nonce_str = "123456789abcdefg",
-                notify_url = "http://127.0.0.1/qrcode/notify/",
+                notify_url = "http://127.0.0.1/api/callback",
                 op_shop_id = "100001",
                 op_user_id = "1001",
                 org_code = "50265462",
-                out_trade_no = CommonHelper.GetTimeStampTen(),
+                out_trade_no = OrderHelper.outTradeNo,
                 pay_type = "alipay",
                 payment_valid_time = "20",
                 remark = "主扫备注",
                 term_no = "12345678",
                 total_fee = "1",
-                sign_type = "RSA256"
+                sign_type = JlpayConfig.sign_type
             };
         }
 
@@ -118,10 +129,24 @@ namespace JLPayWebApp.Pages
             return requestParamStr;
         }
 
-        public static void createQrcode(string content)
+        public void createQrcode(string content)
         {
-            string imgurl = JlpayConfig.baseUrl + Guid.NewGuid().ToString().Replace("-", "") + ".png";
-            imgBase64 = CommonHelper.CreateQrcodeImage(content, imgurl);
+            imgBase64 = CommonHelper.CreateQrcodeImage(content);
+        }
+
+        public void checkNotify(object source, ElapsedEventArgs e)
+        {
+            if(!string.IsNullOrEmpty(notifyContent))
+            {
+                timer.Stop();
+                //updateViewData();
+            }
+        }
+
+        public void updateViewData()
+        {
+            ViewData["notifyContent"] = notifyContent;
+            ViewData["checkNotifySign"] = checkNotifySign;
         }
 
     }

@@ -39,6 +39,5 @@ namespace JLPayWebApp.Utils
         //版本号，无需修改
         public static string version = "1.0.1";
 
-        public static string baseUrl = System.AppDomain.CurrentDomain.BaseDirectory;
     }
 }

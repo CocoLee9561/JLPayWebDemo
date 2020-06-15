@@ -1,31 +1,29 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Project\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj": {}
+    "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj": {}
   },
   "projects": {
-    "C:\\Project\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj": {
+    "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Project\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
+        "projectUniqueName": "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
         "projectName": "JLPayWebApp",
-        "projectPath": "C:\\Project\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
-        "packagesPath": "C:\\Users\\shiningrush\\.nuget\\packages\\",
-        "outputPath": "C:\\Project\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\obj\\",
+        "projectPath": "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
+        "packagesPath": "C:\\Users\\lijing01\\.nuget\\packages\\",
+        "outputPath": "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\shiningrush\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lijing01\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.cnblogs.com/v3/index.json": {},
+          "https://www.nuget.org/api/v2/": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -45,6 +43,10 @@
               "target": "Package",
               "version": "[12.0.3, )"
             },
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.3.9, )"
+            },
             "System.Drawing.Common": {
               "target": "Package",
               "version": "[4.7.0, )"
@@ -52,10 +54,6 @@
             "System.Runtime.Handles": {
               "target": "Package",
               "version": "[4.3.0, )"
-            },
-            "ThoughtWorks.QRCode.Core": {
-              "target": "Package",
-              "version": "[1.0.1.2, )"
             }
           },
           "imports": [

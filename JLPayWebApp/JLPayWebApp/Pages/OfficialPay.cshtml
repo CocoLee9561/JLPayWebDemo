@@ -3,7 +3,7 @@
 
 @using JLPayWebApp.Attris;
 
-<h1>付款码支付接口</h1>
+<h1>公众号小程序支付下单接口</h1>
 <form class="navbar navbar-default navbar-flex-start" method="post">
     <div>
         <p>必传参数：</p>
@@ -42,15 +42,5 @@
     <div class="result-show-group">
         <p>响应参数验签结果：</p>
         <textarea class="result-show-textarea" readonly>@ViewData["checkRspSign"]</textarea>
-        <img src="@OfficialPayModel.imgBase64" />
-    </div>
-
-    <div class="result-show-group">
-        <p>异步通知：</p>
-        <textarea class="result-show-textarea" readonly>@ViewData["notifyContent"]</textarea>
-    </div>
-    <div class="result-show-group">
-        <p>异步通知验签结果：</p>
-        <textarea class="result-show-textarea" readonly>@ViewData["checkNotifySign"]</textarea>
     </div>
 </div>

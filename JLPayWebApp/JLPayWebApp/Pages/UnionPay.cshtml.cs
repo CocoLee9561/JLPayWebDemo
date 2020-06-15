@@ -13,19 +13,16 @@ namespace JLPayWebApp.Pages
 {
     public class UnionPayModel : PageModel
     {
-        public static string TestModel;
-
         public static List<ParamInfoAttribute> paraRequiredList = new List<ParamInfoAttribute>();
         public static List<ParamInfoAttribute> paraNotRequiredList = new List<ParamInfoAttribute>();
-        public static string url = JlpayConfig.serverUrl + "unionPay";
-        public static string imgBase64 = "";
+        public static string url = JlpayConfig.serverUrl + "unionjspay";
         public static bool isSignResValid = false;
         public void OnGet()
         {
             paraRequiredList = new List<ParamInfoAttribute>();
             paraNotRequiredList = new List<ParamInfoAttribute>();
             UnionPayRequest reqParams = new UnionPayRequest();
-            Type type = reqParams.GetType();// 等价于 typeof(unionPayRequest);
+            Type type = reqParams.GetType();
             var props = type.GetProperties();
 
             foreach (var prop in props)
@@ -76,20 +73,20 @@ namespace JLPayWebApp.Pages
                 device_info = "80005611",
                 latitude = "22.144889",
                 longitude = "113.571558",
-                mch_create_ip = "172.20.6.21",
+                mch_create_ip = OrderHelper.localIpAddress,
                 mch_id = "84944035812A01P",
                 nonce_str = "123456789abcdefg",
-                notify_url = "http://127.0.0.1/qrcode/notify/",
+                notify_url = "http://127.0.0.1/api/callback",
                 op_shop_id = "100001",
                 op_user_id = "1001",
                 org_code = "50265462",
-                out_trade_no = CommonHelper.GetTimeStampTen(),
+                out_trade_no = OrderHelper.outTradeNo,
                 pay_type = "alipay",
                 payment_valid_time = "20",
                 remark = "主扫备注",
                 term_no = "12345678",
                 total_fee = "1",
-                sign_type = "RSA256"
+                sign_type = JlpayConfig.sign_type
             };
         }
 
@@ -110,12 +107,6 @@ namespace JLPayWebApp.Pages
             ViewData["requestParams"] = requestParamStr;
 
             return requestParamStr;
-        }
-
-        public static void createQrcode(string content)
-        {
-            string imgurl = JlpayConfig.baseUrl + Guid.NewGuid().ToString().Replace("-", "") + ".png";
-            imgBase64 = CommonHelper.CreateQrcodeImage(content, imgurl);
         }
 
     }

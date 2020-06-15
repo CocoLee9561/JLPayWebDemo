@@ -1,11 +1,11 @@
-﻿using System;
+﻿using QRCoder;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using ThoughtWorks.QRCode.Codec;
 
 namespace JLPayWebApp.Utils
 {
@@ -56,50 +56,33 @@ namespace JLPayWebApp.Utils
         }
 
         /// <summary>
-        /// 生成二维码
-        /// </summary>
-        public static void qrcodeShow()
-        {
-
-        }
-        /// <summary>
         /// 生成二维码图片
         /// </summary>
         /// <param name="content">二维码内容</param>
-        /// <param name="filePath">图片保存地址，需要绝对路径</param>
-        public static string CreateQrcodeImage(string content, string filePath)
+        public static string CreateQrcodeImage(string content)
         {
             int size = 10;  //二维码中每个小点的大小
             Bitmap image = CreateImgCode(content, size); //生成二维码图片
 
             //保存图片，需要图片的绝对地址，这是web项目
             //image.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
-            return ImgToBase64String(image);
+            var strBase64 = "data:image/jpeg;base64," + ImgToBase64String(image);
+            return strBase64;
         }
 
 
         /// &lt;summary>  
         /// 生成二维码图片  
         /// &lt;/summary>  
-        /// &lt;param name="codeNumber">要生成二维码的字符串&lt;/param>       
+        /// &lt;param name="content">要生成二维码的字符串&lt;/param>       
         /// &lt;param name="size">二维码每个颗粒大小尺寸&lt;/param>  
         /// &lt;returns>二维码图片&lt;/returns>  
-        public static Bitmap CreateImgCode(string codeNumber, int size)
+        public static Bitmap CreateImgCode(string content, int size)
         {
-            //创建二维码生成类  
-            QRCodeEncoder qrCodeEncoder = new QRCodeEncoder();
-            //设置编码模式  
-            qrCodeEncoder.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.BYTE;
-            //设置编码测量度  
-            qrCodeEncoder.QRCodeScale = size;
-            //设置编码版本  
-            qrCodeEncoder.QRCodeVersion = 0;
-            //设置编码错误纠正  
-            qrCodeEncoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.M;
-            //生成二维码图片  
-            Bitmap image = qrCodeEncoder.Encode(codeNumber);
-
-            return image;
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(content, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            return qrCode.GetGraphic(20); 
         }
 
 
@@ -121,7 +104,9 @@ namespace JLPayWebApp.Utils
                 return null;
             }
         }
-        //threeebase64编码的字符串转为图片
+
+
+        //base64编码的字符串转为图片
         public static Bitmap Base64StringToImage(string strbase64)
         {
             try

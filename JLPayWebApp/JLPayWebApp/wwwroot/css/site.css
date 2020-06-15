@@ -90,6 +90,10 @@ body {
 .result-show-group {
     margin-top: 25px;
 }
-.result-show-textarea{
+.result-show-textarea {
     width: 100%;
+    min-height: 100px;
+}
+.img-pay-qrcode{
+    max-width: 150px;
 }

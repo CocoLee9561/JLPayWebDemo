@@ -1,6 +1,7 @@
 ﻿@page
 @model JLPayWebApp.Pages.QrcodePayModel
 @using JLPayWebApp.Attris;
+@using JLPayWebApp.Utils;
 @{
     ViewData["Title"] = "扫码支付接口";
 }
@@ -9,7 +10,7 @@
 <form class="navbar navbar-default navbar-flex-start" method="post">
     <div>
         <p>必传参数：</p>
-        @foreach (ParamInfoAttribute item in QrcodePayModel.paraRequiredList)
+        @foreach (ParamInfoAttribute item in Model.paraRequiredList)
         {
             <div class="form-group form-group-flex">
                 @item.Description (@item.Name)：<input type="text" name="@item.Name">
@@ -18,7 +19,7 @@
     </div>
     <div>
         <p>非必传参数：</p>
-        @foreach (ParamInfoAttribute item in QrcodePayModel.paraNotRequiredList)
+        @foreach (ParamInfoAttribute item in Model.paraNotRequiredList)
         {
             <div class="form-group form-group-flex">
                 @item.Description (@item.Name)：<input type="text" name="@item.Name">
@@ -44,16 +45,16 @@
     <div class="result-show-group">
         <p>响应参数验签结果：</p>
         <textarea class="result-show-textarea" readonly>@ViewData["checkRspSign"]</textarea>
-        <img src="@QrcodePayModel.imgBase64" />
+        <img class="img-pay-qrcode" src="@Model.imgBase64" />
     </div>
    
     <div class="result-show-group">
         <p>异步通知：</p>
-        <textarea class="result-show-textarea" readonly>@ViewData["notifyContent"]</textarea>
+        <textarea class="result-show-textarea" readonly>@QrcodePayModel.notifyContent </textarea>
     </div>
     <div class="result-show-group">
         <p>异步通知验签结果：</p>
-        <textarea class="result-show-textarea" readonly>@ViewData["checkNotifySign"]</textarea>
+        <textarea class="result-show-textarea" readonly>@QrcodePayModel.checkNotifySign</textarea>
     </div>
 </div>
 

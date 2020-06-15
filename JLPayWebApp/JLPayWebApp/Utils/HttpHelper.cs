@@ -73,15 +73,27 @@ namespace JLPayWebApp.Utils
         /// <returns></returns>
         public static bool VerifySignature(string responseData)
         {
+            if (string.IsNullOrEmpty(responseData)) return false;
             // 排序
-            SortedDictionary<string, string> sortedResponseDataDic = JsonConvert.DeserializeObject<SortedDictionary<string, string>>(responseData);// new SortedDictionary<string, string>(getProperties<QrcodePayResponse>(qrcodePayResponse));
+            SortedDictionary<string, string> sortedResponseDataDic = JsonConvert.DeserializeObject<SortedDictionary<string, string>>(responseData);
+
+            // 去掉空值
+            Dictionary<string, string> paramForSignDic = new Dictionary<string, string>();
+            foreach (KeyValuePair<string, string> pair in sortedResponseDataDic)
+            {
+                if (pair.Value != null && pair.Value != "")
+                {
+                    paramForSignDic.Add(pair.Key, pair.Value);
+                }
+            }
+
             var signRes = sortedResponseDataDic["sign"];
             // 得到去掉sign后的参数
             if (!string.IsNullOrEmpty(signRes))
             {
-                sortedResponseDataDic.Remove("sign");
+                paramForSignDic.Remove("sign");
             }
-            string signContent = JsonConvert.SerializeObject(sortedResponseDataDic);
+            string signContent = JsonConvert.SerializeObject(paramForSignDic);
 
             // 验证签名
             bool isSignValid = Verify(signContent, signRes);

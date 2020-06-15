@@ -47,6 +47,18 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+      "QRCoder/1.3.9": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "4.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/QRCoder.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/QRCoder.dll": {}
+        }
+      },
       "System.Drawing.Common/4.7.0": {
         "type": "package",
         "dependencies": {
@@ -89,18 +101,6 @@
         },
         "compile": {
           "ref/netstandard1.3/System.Runtime.Handles.dll": {}
-        }
-      },
-      "ThoughtWorks.QRCode.Core/1.0.1.2": {
-        "type": "package",
-        "dependencies": {
-          "System.Drawing.Common": "4.5.0"
-        },
-        "compile": {
-          "lib/netcoreapp2.0/ThoughtWorks.QRCode.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp2.0/ThoughtWorks.QRCode.dll": {}
         }
       }
     }
@@ -195,6 +195,21 @@
         "newtonsoft.json.12.0.3.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "packageIcon.png"
+      ]
+    },
+    "QRCoder/1.3.9": {
+      "sha512": "IHbhdLATo5dr6wvoDP5vGv9kn/vHkxtyzoTzUdnMU32Ju+/mg82xirHsSvTrhlwXb5X3CrtUhBbVfgSu7brS/A==",
+      "type": "package",
+      "path": "qrcoder/1.3.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/QRCoder.dll",
+        "lib/net40/QRCoder.dll",
+        "lib/netstandard1.1/QRCoder.dll",
+        "lib/netstandard2.0/QRCoder.dll",
+        "qrcoder.1.3.9.nupkg.sha512",
+        "qrcoder.nuspec"
       ]
     },
     "System.Drawing.Common/4.7.0": {
@@ -363,55 +378,39 @@
         "system.runtime.handles.4.3.0.nupkg.sha512",
         "system.runtime.handles.nuspec"
       ]
-    },
-    "ThoughtWorks.QRCode.Core/1.0.1.2": {
-      "sha512": "s9drHRUMi8mD4Sl8WaVhWfuyHXlYxMBnod7xk0M3j4dN4TrP7B/JvCfcZlShQAKHwlm547n/6SnQxogrNMN0Ug==",
-      "type": "package",
-      "path": "thoughtworks.qrcode.core/1.0.1.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netcoreapp2.0/ThoughtWorks.QRCode.dll",
-        "lib/netstandard2.0/ThoughtWorks.QRCode.dll",
-        "thoughtworks.qrcode.core.1.0.1.2.nupkg.sha512",
-        "thoughtworks.qrcode.core.nuspec"
-      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Newtonsoft.Json >= 12.0.3",
+      "QRCoder >= 1.3.9",
       "System.Drawing.Common >= 4.7.0",
-      "System.Runtime.Handles >= 4.3.0",
-      "ThoughtWorks.QRCode.Core >= 1.0.1.2"
+      "System.Runtime.Handles >= 4.3.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shiningrush\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\lijing01\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Project\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
+      "projectUniqueName": "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
       "projectName": "JLPayWebApp",
-      "projectPath": "C:\\Project\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
-      "packagesPath": "C:\\Users\\shiningrush\\.nuget\\packages\\",
-      "outputPath": "C:\\Project\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\obj\\",
+      "projectPath": "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\JLPayWebApp.csproj",
+      "packagesPath": "C:\\Users\\lijing01\\.nuget\\packages\\",
+      "outputPath": "D:\\github\\JLPayWebDemo\\JLPayWebApp\\JLPayWebApp\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\shiningrush\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lijing01\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.cnblogs.com/v3/index.json": {},
+        "https://www.nuget.org/api/v2/": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
@@ -431,6 +430,10 @@
             "target": "Package",
             "version": "[12.0.3, )"
           },
+          "QRCoder": {
+            "target": "Package",
+            "version": "[1.3.9, )"
+          },
           "System.Drawing.Common": {
             "target": "Package",
             "version": "[4.7.0, )"
@@ -438,10 +441,6 @@
           "System.Runtime.Handles": {
             "target": "Package",
             "version": "[4.3.0, )"
-          },
-          "ThoughtWorks.QRCode.Core": {
-            "target": "Package",
-            "version": "[1.0.1.2, )"
           }
         },
         "imports": [
